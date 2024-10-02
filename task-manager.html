@@ -125,6 +125,24 @@
         border-left: 5px solid #45a049;
       }
 
+      .redirect-button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+
+      .redirect-button:hover {
+        background-color: #45a049;
+      }
+
       /* Media query for smaller screens */
       @media (max-width: 600px) {
         .task-input input {
@@ -132,6 +150,10 @@
         }
 
         .task-input button {
+          width: 100%;
+        }
+
+        .redirect-button {
           width: 100%;
         }
       }
@@ -152,6 +174,9 @@
         <h2>Completed Tasks</h2>
         <ul id="done-task-list"></ul>
       </div>
+
+      <!-- Dashboard redirect button -->
+      <button class="redirect-button" onclick="goToDashboard()">Go to Dashboard</button>
     </div>
 
     <script>
@@ -248,6 +273,10 @@
       function deleteCompletedTask(index) {
         doneTasks.splice(index, 1);
         renderDoneTasks();
+      }
+
+      function goToDashboard() {
+        window.location.href = "dashboard.html";
       }
     </script>
   </body>
