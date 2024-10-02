@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Management</title>
+    <style>
+      /* General styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f0f4f8;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .container {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 400px;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+        text-align: center;
+        margin-bottom: 20px;
+        color: #4caf50;
+      }
+
+      .task-input {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+
+      .task-input input {
+        padding: 10px;
+        border: 2px solid #4caf50;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+
+      #task {
+        width: 65%;
+      }
+
+      #deadline {
+        width: 25%;
+      }
+
+      .task-input button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .task-input button:hover {
+        background-color: #45a049;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      ul li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f9f9f9;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border-left: 5px solid #4caf50;
+      }
+
+      ul li button {
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      ul li button:hover {
+        background-color: #45a049;
+      }
+
+      .done-tasks h2 {
+        margin-top: 20px;
+        color: #4caf50;
+        text-align: center;
+      }
+
+      .done-tasks {
+        display: none;
+      }
+
+      .done-tasks.active {
+        display: block;
+      }
+
+      .done-tasks li {
+        background-color: #e0ffe0;
+        border-left: 5px solid #45a049;
+      }
+
+      /* Media query for smaller screens */
+      @media (max-width: 600px) {
+        .task-input input {
+          width: 100%;
+        }
+
+        .task-input button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Task Manager</h1>
+      <div class="task-input">
+        <input type="text" id="task" placeholder="Add a new task" />
+        <input type="number" id="deadline" placeholder="Days" />
+        <button onclick="addTask()">Add Task</button>
+      </div>
+      <ul id="task-list"></ul>
+
+      <!-- Done tasks section -->
+      <div class="done-tasks" id="done-tasks-section">
+        <h2>Completed Tasks</h2>
+        <ul id="done-task-list"></ul>
+      </div>
+    </div>
+
+    <script>
+      let tasks = [];
+      let doneTasks = [];
+
+      function addTask() {
+        const taskInput = document.getElementById("task");
+        const deadlineInput = document.getElementById("deadline");
+
+        const taskText = taskInput.value;
+        const deadline = parseInt(deadlineInput.value);
+
+        if (taskText === "" || isNaN(deadline)) {
+          alert("Please enter a task and valid deadline in days!");
+          return;
+        }
+
+        const task = {
+          text: taskText,
+          deadline: deadline,
+        };
+
+        tasks.push(task);
+        sortTasks();
+        renderTasks();
+
+        // Clear the input fields
+        taskInput.value = "";
+        deadlineInput.value = "";
+      }
+
+      function sortTasks() {
+        tasks.sort((a, b) => a.deadline - b.deadline);
+      }
+
+      function renderTasks() {
+        const taskList = document.getElementById("task-list");
+        taskList.innerHTML = "";
+
+        tasks.forEach((task, index) => {
+          const li = document.createElement("li");
+          li.innerHTML = `${task.text} <span>(${task.deadline} days left)</span>`;
+
+          const doneButton = document.createElement("button");
+          doneButton.textContent = "Done";
+          doneButton.onclick = function () {
+            completeTask(index);
+          };
+
+          li.appendChild(doneButton);
+          taskList.appendChild(li);
+        });
+      }
+
+      function completeTask(index) {
+        const doneTask = tasks.splice(index, 1)[0];
+        doneTasks.push(doneTask);
+
+        renderTasks();
+        renderDoneTasks();
+      }
+
+      function renderDoneTasks() {
+        const doneTaskList = document.getElementById("done-task-list");
+        const doneTasksSection = document.getElementById("done-tasks-section");
+
+        // If there are done tasks, show the section
+        if (doneTasks.length > 0) {
+          doneTasksSection.classList.add("active");
+        } else {
+          doneTasksSection.classList.remove("active");
+        }
+
+        doneTaskList.innerHTML = "";
+
+        doneTasks.forEach((task, index) => {
+          const li = document.createElement("li");
+          li.textContent = task.text + " (Completed)";
+
+          // Add a delete button to remove the task from completed tasks
+          const deleteButton = document.createElement("button");
+          deleteButton.textContent = "Delete";
+          deleteButton.style.backgroundColor = "#ff5f5f";
+          deleteButton.onclick = function () {
+            deleteCompletedTask(index);
+          };
+
+          li.appendChild(deleteButton);
+          doneTaskList.appendChild(li);
+        });
+      }
+
+      function deleteCompletedTask(index) {
+        doneTasks.splice(index, 1);
+        renderDoneTasks();
+      }
+    </script>
+  </body>
+</html>

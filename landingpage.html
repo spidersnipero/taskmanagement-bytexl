@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Management - Get Organized</title>
+    <style>
+      /* General styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f0f4f8;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .container {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 800px;
+        padding: 40px 20px;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 36px;
+        color: #4caf50;
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      .benefits {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 30px;
+      }
+
+      .benefit {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+        border-left: 5px solid #4caf50;
+        width: 48%;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .benefit h3 {
+        font-size: 22px;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      .benefit p {
+        font-size: 16px;
+        color: #666;
+      }
+
+      .cta {
+        background-color: #4caf50;
+        color: white;
+        padding: 15px 30px;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 30px;
+      }
+
+      .cta:hover {
+        background-color: #45a049;
+      }
+
+      /* Sign In and Sign Up buttons */
+      .auth-buttons {
+        margin-top: 20px;
+      }
+
+      .auth-buttons button {
+        background-color: transparent;
+        border: 2px solid #4caf50;
+        color: #4caf50;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin: 10px;
+      }
+
+      .auth-buttons button:hover {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      /* Media query for smaller screens */
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 28px;
+        }
+
+        .benefit {
+          width: 100%;
+        }
+
+        .cta {
+          font-size: 16px;
+          padding: 12px 25px;
+        }
+
+        .auth-buttons button {
+          width: 100%;
+          margin-bottom: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Task Management Made Simple</h1>
+      <p>
+        Take control of your day with our task management system! Simplify your
+        life, stay organized, and be more productive. Whether you're managing
+        personal goals or work-related tasks, we make it easy to stay on top of
+        everything.
+      </p>
+
+      <div class="benefits">
+        <div class="benefit">
+          <h3>Boost Your Productivity</h3>
+          <p>
+            Task management helps you plan your day and prioritize important
+            activities. Stay focused and achieve more with less effort.
+          </p>
+        </div>
+
+        <div class="benefit">
+          <h3>Never Miss a Deadline</h3>
+          <p>
+            With our system, you can set deadlines and reminders so that you
+            never miss an important task or appointment again.
+          </p>
+        </div>
+
+        <div class="benefit">
+          <h3>Stay Organized</h3>
+          <p>
+            Keep all your tasks in one place, organize them into categories, and
+            break down large projects into manageable steps.
+          </p>
+        </div>
+
+        <div class="benefit">
+          <h3>Work Across Devices</h3>
+          <p>
+            Our task manager works seamlessly across all devices, so you can
+            manage your tasks whether you're on your phone, tablet, or computer.
+          </p>
+        </div>
+      </div>
+
+      <button class="cta" onclick="location.href='task-manager.html'">
+        Get Started Now
+      </button>
+
+      <!-- Sign In and Sign Up buttons -->
+      <div class="auth-buttons">
+        <button onclick="location.href='signin.html'">Sign In</button>
+        <button onclick="location.href='signup.html'">Sign Up</button>
+      </div>
+    </div>
+  </body>
+</html>
